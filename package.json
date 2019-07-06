@@ -4,6 +4,20 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "joi": "^14.3.1",
+    "knex": "^0.18.3",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {
+    "criptext-js-tools": "^0.7.2"
+  },
+  "scripts": {
+    "lint": "criptext-js-tools lint",
+    "test": "criptext-js-tools test",
+    "integration": "NODE_ENV=integration criptext-js-tools integration",
+    "init-db": "mysql -u root -e 'create database if not exists aenima_db;' && node ./src/scripts/initDB.js",
+    "recreate-db": "mysql -u root -e 'drop database aenima_db; create database aenima_db;' && node ./src/scripts/initDB.js",
+    "reset-db": "node ./src/scripts/resetDB.js"
   }
 }

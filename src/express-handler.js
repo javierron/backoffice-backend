@@ -14,6 +14,7 @@ const APIHandler = handlerFn => async (req, res) => {
     res.status(status).send(resp);
   } catch (err) {
     res.status(500).send('Internal Server Error');
+    console.log(err);
   }
 };
 

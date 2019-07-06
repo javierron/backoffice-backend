@@ -20,6 +20,18 @@ const postGameSession = body => {
   });
 };
 
+const getPlayerGameSessions = body => {
+  const schema = Joi.object().keys({
+    playerId: Joi.number().integer()
+  });
+
+  return Joi.validate(body, schema, {
+    presence: 'required',
+    stripUnknown: true
+  });
+};
+
 module.exports = {
-  postGameSession
+  postGameSession,
+  getPlayerGameSessions
 };

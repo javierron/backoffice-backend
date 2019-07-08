@@ -9,7 +9,7 @@ const getUserGameSession = (playerId, trx) => {
   const knex = trx || db;
   return knex
     .select('plays', 'date', 'gameId') //join gameId to game name
-    .from('user')
+    .from('gameSession')
     .where({ playerId });
 };
 module.exports = {

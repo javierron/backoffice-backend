@@ -2,6 +2,7 @@ const validate = require('./validate.js');
 const queries = require('../../sql/game-session-queries');
 
 const postGameSession = async data => {
+  //TODO: accept only terminal token
   const { value, error } = validate.postGameSession(data);
   if (error) return { status: 422, resp: error };
 
@@ -20,11 +21,7 @@ const getPlayerGameSessions = async data => {
 
   const { playerId } = value;
 
-  const queryData = {
-    playerId
-  };
-
-  const sessions = await queries.getUserGameSession(queryData);
+  const sessions = await queries.getUserGameSession(playerId);
   return {
     status: 200,
     resp: sessions

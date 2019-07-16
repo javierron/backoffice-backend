@@ -2,12 +2,14 @@ const APIHandler = handlerFn => async (req, res) => {
   const body = req.body || {};
   const params = req.params || {};
   const query = req.query || {};
+  const session = req.user;
 
   try {
     const handlerRes = await handlerFn({
       ...query,
       ...params,
-      ...body
+      ...body,
+      ...(session && { session })
     });
     const { status, resp } = handlerRes;
 

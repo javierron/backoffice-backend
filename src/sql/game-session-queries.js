@@ -2,7 +2,7 @@ const db = require('../db/db.js');
 
 const insertGameSession = (data, trx) => {
   const knex = trx || db;
-  return knex.table('domain').insert(data);
+  return knex.table('gameSession').insert(data);
 };
 
 const getUserGameSession = (playerId, trx) => {

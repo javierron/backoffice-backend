@@ -12,6 +12,7 @@ const { APIHandler } = require('./express-handler.js');
 
 const session = require('./routes/session/handler.js');
 const user = require('./routes/user/handler.js');
+const pos = require('./routes/pos/handler.js');
 
 app.get('/ping', (_, res) => res.send('pong'));
 
@@ -19,12 +20,18 @@ app.post('/gamesession', APIHandler(session.post));
 app.get('/gamesession/:playerId', APIHandler(session.get));
 //app.get('/gamesession/:terminalId', APIHandler(session.get));
 //app.get('/gamesession/:posId', APIHandler(session.get));
-
-app.post('/user/login', APIHandler(user.login.post));
-
 //--------------------------------------------------------------------------------
 
-// app.post('/pos', APIHandler(pos.post));
+//--------------------------------------------------------------------------------
+app.post('/user/login', APIHandler(user.login.post));
+
+app.post('/pos', jwt.userMiddleware, jwt.errorHandler, APIHandler(pos.post));
+app.post(
+  '/pos/assign',
+  jwt.userMiddleware,
+  jwt.errorHandler,
+  APIHandler(pos.assign.post)
+);
 // app.get('/pos/:posId', APIHandler(pos.get));
 // app.patch('/pos/:posId', APIHandler(pos.patch));
 // app.del('/pos/:posId', APIHandler(pos.delete));
@@ -41,6 +48,8 @@ app.post('/user', jwt.userMiddleware, jwt.errorHandler, APIHandler(user.post));
 // app.get('/user/:posId', APIHandler(user.get));
 // app.patch('/user/:userId', APIHandler(user.patch));
 // app.del('/user/:userId', APIHandler(user.delete));
+
+//--------------------------------------------------------------------------------
 
 // app.post('/balance/:userId', APIHandler());
 // app.post('/balance/:terminalId', APIHandler());

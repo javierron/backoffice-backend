@@ -34,9 +34,28 @@ const createUser = (token, data) =>
 
 //----------------------------------------------------
 
+//POS
+//----------------------------------------------------
+const createPos = (token, data) =>
+  request
+    .post(`${url}/pos`)
+    .set('Authorization', `Bearer ${token}`)
+    .ok(res => res.status)
+    .send(data);
+
+const assignPos = (token, data) =>
+  request
+    .post(`${url}/pos/assign`)
+    .set('Authorization', `Bearer ${token}`)
+    .ok(res => res.status)
+    .send(data);
+//----------------------------------------------------
+
 module.exports = {
   getGameSessions,
   postGameSessions,
   login,
-  createUser
+  createUser,
+  createPos,
+  assignPos
 };

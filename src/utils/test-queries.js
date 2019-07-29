@@ -12,7 +12,21 @@ const findGameSession = (whereObj = {}) =>
     .from('gameSession')
     .where(whereObj);
 
+const findPos = (whereObj = {}) =>
+  db
+    .select()
+    .from('pos')
+    .where(whereObj);
+
+const findUserPos = (whereObj = {}) =>
+  db
+    .select()
+    .from('userPos')
+    .where(whereObj);
+
 module.exports = {
   findUser,
-  findGameSession
+  findGameSession,
+  findPos,
+  findUserPos
 };

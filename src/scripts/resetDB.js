@@ -11,6 +11,8 @@ const resetDB = async () => {
   try {
     await knex('gameSession').del();
     await knex('userAdmin').del();
+    await knex('userPos').del();
+    await knex('pos').del();
     await knex('user').del();
 
     await knex('user').insert({

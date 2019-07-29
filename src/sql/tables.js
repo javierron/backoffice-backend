@@ -57,11 +57,42 @@ const createUserAdminColumns = table => {
     .inTable('user');
 };
 
+const createPosColumns = table => {
+  table.bigIncrements('rowid');
+  table.string('name').notNullable();
+  table.string('description').notNullable();
+  table.dateTime('date').notNullable();
+};
+
+const createUserPosColumns = table => {
+  table.bigIncrements('rowid');
+  table
+    .bigInteger('userId')
+    .unsigned()
+    .notNullable();
+  table
+    .bigInteger('posId')
+    .unsigned()
+    .notNullable();
+
+  table
+    .foreign('userId')
+    .references('rowid')
+    .inTable('user');
+
+  table
+    .foreign('posId')
+    .references('rowid')
+    .inTable('pos');
+};
+
 const createTables = () => {
   return db.schema
     .createTable('gameSession', createGameSessionColumns)
     .createTable('user', createUserColumns)
-    .createTable('userAdmin', createUserAdminColumns);
+    .createTable('userAdmin', createUserAdminColumns)
+    .createTable('pos', createPosColumns)
+    .createTable('userPos', createUserPosColumns);
 };
 
 module.exports = {
